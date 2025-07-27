@@ -23,7 +23,7 @@ const Step2Final = ({ values, setValues, errors, setErrors }) => {
   };
 
   return (
-    <Stack spacing={2.5}>
+    <Stack spacing={2}>
       <TextField
         label="Електронна пошта"
         type="email"
@@ -33,6 +33,7 @@ const Step2Final = ({ values, setValues, errors, setErrors }) => {
         error={!!errors.email}
         helperText={errors.email || ' '}
         autoComplete="email"
+        sx={{ pb: 1.5 }}
       />
       <MuiTelInput
         variant="outlined"
@@ -53,6 +54,7 @@ const Step2Final = ({ values, setValues, errors, setErrors }) => {
               onChange={handleChange('agreedToTerms')}
               name="agreedToTerms"
               color="primary"
+              sx={{ ml: 0.5 }}
             />
           }
           label={
@@ -63,7 +65,7 @@ const Step2Final = ({ values, setValues, errors, setErrors }) => {
         />
         <FormHelperText
           error
-          sx={{ minHeight: '20px', ml: '14px', mt: -2 }}
+          sx={{ minHeight: '20px', ml: '14px', mt: -4.5 }}
         >
           {errors.agreedToTerms || ' '}
         </FormHelperText>

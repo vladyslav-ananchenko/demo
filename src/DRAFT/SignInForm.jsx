@@ -88,7 +88,7 @@ const SignInForm = () => {
           noValidate
           sx={{ width: '100%' }}
         >
-          <Stack spacing={2.5}>
+          <Stack spacing={2}>
             <TextField
               label="Логін"
               variant="outlined"

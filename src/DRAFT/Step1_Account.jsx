@@ -13,6 +13,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 
+const PASSWORD_HINTS_MIN_HEIGHT = 44;
+
 const Requirement = ({ met, text }) => (
   <Box
     sx={{
@@ -57,7 +59,7 @@ const Step1Account = ({ values, setValues, errors, setErrors }) => {
   );
 
   return (
-    <Stack spacing={4}>
+    <Stack spacing={2}>
       <TextField
         label="Логін"
         fullWidth
@@ -66,6 +68,9 @@ const Step1Account = ({ values, setValues, errors, setErrors }) => {
         error={!!errors.login}
         helperText={errors.login || '5-20 символів (літери та цифри)'}
         autoComplete="username"
+        sx={{
+          pb: 1.5,
+        }}
       />
       <Box>
         <TextField
@@ -75,10 +80,37 @@ const Step1Account = ({ values, setValues, errors, setErrors }) => {
           value={values.password}
           onChange={handleChange('password')}
           error={!!errors.password}
-          helperText={errors.password || ' '}
+          helperText={
+            <Box sx={{ minHeight: `${PASSWORD_HINTS_MIN_HEIGHT}px` }}>
+              {errors.password ? (
+                <Typography
+                  color="error"
+                  variant="caption"
+                >
+                  {errors.password}
+                </Typography>
+              ) : (
+                <Box
+                  sx={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(2, 1fr)',
+                    gap: '4px 16px',
+                  }}
+                >
+                  {requirements.map(({ text, met }) => (
+                    <Requirement
+                      key={text}
+                      met={met}
+                      text={text}
+                    />
+                  ))}
+                </Box>
+              )}
+            </Box>
+          }
           autoComplete="new-password"
           InputProps={{
-            endAdornment: (
+            endAdornment: values.password && (
               <InputAdornment position="end">
                 <IconButton
                   onClick={() => setShowPassword(!showPassword)}
@@ -90,23 +122,6 @@ const Step1Account = ({ values, setValues, errors, setErrors }) => {
             ),
           }}
         />
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '4px 16px',
-            mt: 1,
-            pl: 0.5,
-          }}
-        >
-          {requirements.map((req) => (
-            <Requirement
-              key={req.text}
-              met={req.met}
-              text={req.text}
-            />
-          ))}
-        </Box>
       </Box>
       <TextField
         label="Повторіть пароль"
@@ -118,7 +133,7 @@ const Step1Account = ({ values, setValues, errors, setErrors }) => {
         helperText={errors.confirmPassword || ' '}
         autoComplete="new-password"
         InputProps={{
-          endAdornment: (
+          endAdornment: values.confirmPassword && (
             <InputAdornment position="end">
               <IconButton
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}

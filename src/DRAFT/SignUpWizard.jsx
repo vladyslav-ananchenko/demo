@@ -121,7 +121,7 @@ const SignUpWizard = () => {
           activeStep={activeStep}
           alternativeLabel
           sx={{
-            mb: 3,
+            mb: 2,
             '& .MuiStepConnector-root.Mui-active .MuiStepConnector-line': {
               borderColor: 'primary.main',
             },
@@ -141,7 +141,7 @@ const SignUpWizard = () => {
           component="form"
           noValidate
           sx={{
-            minHeight: 320,
+            minHeight: 200,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
@@ -150,7 +150,7 @@ const SignUpWizard = () => {
           {getStepContent(activeStep)}
         </Box>
 
-        <Box sx={{ mt: 3 }}>
+        <Box sx={{ mt: 2 }}>
           <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button
               disabled={activeStep === 0}
